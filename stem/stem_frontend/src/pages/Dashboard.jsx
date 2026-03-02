@@ -209,12 +209,16 @@ export default function Dashboard() {
               className="px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold text-lg hover:bg-white/20 transition-all">
               Start Learning
             </button>
+            <button
+              onClick={() => {window.location.href="https://ai-3d-playground.vercel.app/"}}
+              className="px-8 py-4 rounded-2xl bg-blue-600 border border-white/20 text-white font-bold text-lg hover:bg-white/20 transition-all">
+              Explore 3D models
+            </button>
           </motion.div>
         </div>
       </section>
 
       <AdventureSection adventures={adventures} />
-      
 
       {/* Quick Stats */}
       <section className="py-20">

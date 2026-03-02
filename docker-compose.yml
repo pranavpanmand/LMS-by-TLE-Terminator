@@ -1,8 +1,9 @@
-version: '2.5'
+version: '3.8'
 
 services:
   backend:
     build: ./backend
+    image: ghcr.io/abhas20/lms-backend:latest
     container_name: lms_backend
     ports:
       - "8000:8000"
@@ -12,6 +13,7 @@ services:
 
   stem-backend:
     build: ./stem/stem_backend
+    image: ghcr.io/abhas20/lms-stem-backend:latest
     container_name: lms_stem_backend
     ports:
       - "5001:5001"
@@ -21,6 +23,7 @@ services:
 
   stem-frontend:
     build: ./stem/stem_frontend
+    image: ghcr.io/abhas20/lms-stem-frontend:latest
     container_name: lms_stem_frontend
     ports:
       - "3000:80"
@@ -32,11 +35,12 @@ services:
 
   frontend:
     build: ./frontend
+    image: ghcr.io/abhas20/lms-frontend:latest
     container_name: lms_frontend
     ports:
       - "5173:80"
     env_file:
       - ./frontend/.env
-    restart: unless-stopped
     depends_on:
       - backend
+    restart: unless-stopped

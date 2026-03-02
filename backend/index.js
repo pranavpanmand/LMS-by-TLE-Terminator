@@ -27,8 +27,13 @@ dotenv.config()
 let port = process.env.PORT || 8000
 
 const allowedOrigins = [
-    process.env.FRONTEND_URL , "http://localhost:5173",
-    "https://lms-by-tle-terminator.vercel.app"
+  process.env.FRONTEND_URL,
+  "http://localhost:5173",
+  "https://lms-by-tle-terminator.vercel.app",
+  "http://lmsbytle.codes",
+  "https://lmsbytle.codes",
+  "http://www.lmsbytle.codes",
+  "https://www.lmsbytle.codes",
 ];
 
 let app = express()
