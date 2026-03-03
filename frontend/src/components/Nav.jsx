@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 import { serverUrl } from "../App";
-import { FaVideo, FaCrown, FaUserCircle, FaChevronDown } from "react-icons/fa";
+import { FaVideo, FaCrown, FaUserCircle, FaChevronDown,FaBrain } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Nav() {
@@ -200,6 +200,11 @@ function Nav() {
                             onClick={() => navigate("/career")}
                           />
                         )}
+                        <DropdownItem
+                          icon={<FaBrain />}
+                          label="Stress Analysis"
+                          onClick={() => navigate("/stress-analysis")}
+                        />
                       </div>
 
                       {/* Logout */}

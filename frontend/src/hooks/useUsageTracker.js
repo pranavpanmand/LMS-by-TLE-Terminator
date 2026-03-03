@@ -11,7 +11,7 @@ export default function useUsageTracker() {
 
   useEffect(() => {
 
-    console.log("🧠 Usage tracker started");
+    //console.log("🧠 Usage tracker started");
 
     const sendUsage = async () => {
 
@@ -27,7 +27,7 @@ export default function useUsageTracker() {
 
       try {
 
-        console.log("📡 Sending usage:", minutes);
+        //console.log("📡 Sending usage:", minutes);
 
         const res = await axios.post(
           `${serverUrl}/api/usage/update`,
@@ -35,7 +35,7 @@ export default function useUsageTracker() {
           { withCredentials: true }
         );
 
-        console.log("✅ usage saved", res.data);
+        //console.log("✅ usage saved", res.data);
 
         if (res.data.continuousUsageMinutes > 120) {
           alert("You have been studying for 2 hours. Take a short break!");
@@ -53,14 +53,14 @@ export default function useUsageTracker() {
 
       if (document.hidden) {
 
-        console.log("🚫 Tab hidden → saving usage");
+        //console.log("🚫 Tab hidden → saving usage");
 
         sendUsage();
         isTabActive.current = false;
 
       } else {
 
-        console.log("👀 Tab active");
+        //console.log("👀 Tab active");
 
         sessionStart.current = Date.now();
         isTabActive.current = true;
@@ -75,7 +75,7 @@ export default function useUsageTracker() {
     const resetIdleTimer = () => {
 
       if (isIdle.current) {
-        console.log("🟢 User active again");
+        //console.log("🟢 User active again");
         sessionStart.current = Date.now();
       }
 
@@ -85,7 +85,7 @@ export default function useUsageTracker() {
 
       idleTimer.current = setTimeout(() => {
 
-        console.log("💤 User idle → saving usage");
+        //console.log("💤 User idle → saving usage");
 
         isIdle.current = true;
         sendUsage();
