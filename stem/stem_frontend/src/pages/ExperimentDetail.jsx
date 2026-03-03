@@ -12,7 +12,7 @@ import { Button } from "@radix-ui/themes";
 import Loader from "../components/Loader";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API = `${BACKEND_URL}/api/stem`;
 
 const SUBJECT_UI = {
   physics: {

@@ -5,7 +5,7 @@ import { ArrowLeft, Send, Sparkles, Loader2, Plus } from "lucide-react";
 import { Button } from "@radix-ui/themes";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+const API = `${BACKEND_URL}/api/stem`;
 
 export default function AITutor() {
   const navigate = useNavigate();

@@ -7,8 +7,21 @@ import ProgressTracker from './pages/ProgressTracker';
 import { Toaster } from 'sonner';
 import QuizLearning from './pages/QuizLearning';
 import ExperimentLab from './pages/ExperimentLab';
+import useAuth from './hooks/useAuth';
 
 function App() {
+  const { user, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (!user) return null; // redirect is already happening in useAuth
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -25,7 +38,7 @@ function App() {
             element={<ExperimentDetail />}
           />
           <Route path="/tutor" element={<AITutor />} />
-          {/* <Route path="/progress" element={<ProgressTracker />} /> */}
+          <Route path="/progress" element={<ProgressTracker />} />
         </Routes>
       </BrowserRouter>
       <Toaster position="top-center" />

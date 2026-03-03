@@ -18,7 +18,7 @@ import AdventureSection from "../components/AdventureSection";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 const mainUrl = import.meta.env.VITE_MAIN_URL || "http://localhost:5173";
 
-const API = `${BACKEND_URL}/api`;
+const API = `${BACKEND_URL}/api/stem`;
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -150,6 +150,9 @@ export default function Dashboard() {
           Back
         </Button>
       </div>
+        <Button onClick={()=>{navigate('/progress')}}>
+          Progress
+        </Button>
 
       {/* ================= HERO ================= */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
