@@ -40,6 +40,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
   "https://lms-by-tle-terminator.vercel.app",
+  "https://lms-ten-gold.vercel.app",
   "http://lmsbytle.codes",
   "https://lmsbytle.codes",
   "http://www.lmsbytle.codes",
