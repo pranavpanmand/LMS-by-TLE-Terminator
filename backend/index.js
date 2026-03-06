@@ -23,14 +23,13 @@ import liveRouter from "./routes/liveRoutes.js";
 import summaryRouter from "./routes/summaryRoute.js"
 import stressRoutes from "./routes/stressRoutes.js";
 
-
 // ─── STEM Routes ───
 import stemQuizRouter from "./routes/stemQuizRoute.js";
 import stemExperimentRouter from "./routes/stemExperimentRoute.js";
 import stemChatRouter from "./routes/stemChatRoute.js";
 import stemProgressRouter from "./routes/stemProgressRoute.js";
 import stemInitRouter from "./routes/stemInitRoute.js";
-
+import flowchartRoutes from "./routes/flowchart.routes.js";
 dotenv.config()
 
 let port = process.env.PORT || 8000
@@ -82,6 +81,8 @@ app.use("/api/ai-scheduler", aiSchedulerRoute);
 app.use("/api/summary", summaryRouter);
 app.use("/api/live", liveRouter);
 app.use("/api/usage", usageRoutes);
+
+app.use("/api/flowcharts", flowchartRoutes);
 
 // ─── STEM Routes ───
 app.use("/api/stem/quiz", stemQuizRouter);

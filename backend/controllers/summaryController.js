@@ -24,7 +24,7 @@ async function getOrGenerateTranscription(lecture) {
   );
 
   const jobId = startResp.data.job_id;
-  const MAX_ATTEMPTS = 60;
+  const MAX_ATTEMPTS = 100; // ~5 minutes max (100 attempts * 3s interval)
   const POLL_INTERVAL = 3000;
 
   let attempt = 0;
