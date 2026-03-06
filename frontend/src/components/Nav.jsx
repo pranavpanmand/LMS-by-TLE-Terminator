@@ -1,8 +1,6 @@
-
-
 import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.jpg";
-import { IoMdPerson, IoMdSettings, IoMdLogOut } from "react-icons/io";
+import { IoMdSettings, IoMdLogOut } from "react-icons/io";
 import { GiHamburgerMenu, GiSplitCross } from "react-icons/gi";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
@@ -10,7 +8,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "../redux/userSlice";
 import { serverUrl } from "../App";
-import { FaVideo, FaCrown, FaUserCircle, FaChevronDown,FaBrain } from "react-icons/fa";
+import { FaVideo, FaCrown, FaUserCircle, FaChevronDown, FaBrain } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
 function Nav() {
@@ -23,20 +21,15 @@ function Nav() {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
 
-  // Handle Scroll Effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = async () => {
     try {
-      await axios.get(`${serverUrl}/api/auth/logout`, {
-        withCredentials: true,
-      });
+      await axios.get(`${serverUrl}/api/auth/logout`, { withCredentials: true });
       dispatch(setUserData(null));
       toast.success("Logged out successfully");
       navigate("/");
@@ -45,7 +38,6 @@ function Nav() {
     }
   };
 
-  // Close dropdowns on route change
   useEffect(() => {
     setShowHam(false);
     setShowPro(false);
@@ -61,7 +53,7 @@ function Nav() {
         className={`fixed top-0 w-full h-[80px] z-50 px-6 lg:px-12 flex items-center justify-between transition-all duration-300
         ${scrolled ? "bg-[#0f172a]/95 backdrop-blur-xl shadow-2xl border-b border-white/5" : "bg-[#0f172a] border-b border-white/10"}`}
       >
-        {/* --- Logo Section --- */}
+        {/* --- Logo --- */}
         <div
           className="flex items-center gap-3 cursor-pointer group"
           onClick={() => navigate("/")}
@@ -74,8 +66,6 @@ function Nav() {
               className="relative w-10 h-10 rounded-xl object-cover border border-white/10 shadow-lg group-hover:scale-105 transition-transform duration-300"
             />
           </div>
-
-          {/* UPDATED BRAND NAME */}
           <span className="font-black text-white tracking-tight text-2xl group-hover:text-blue-200 transition-colors">
             TLE <span className="text-amber-400">Terminators</span>
           </span>
@@ -83,7 +73,20 @@ function Nav() {
 
         {/* --- Desktop Menu --- */}
         <div className="hidden lg:flex items-center gap-6">
-          {/* Live Classes Button (Pulsing) */}
+
+          {/* FlowX Button */}
+          {userData && (
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => navigate("/flowcharts")}
+              className="flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/30 text-violet-400 rounded-full font-bold text-xs uppercase tracking-wider hover:bg-violet-500 hover:text-white transition-all mr-1"
+            >
+              🗺️ FlowX
+            </motion.button>
+          )}
+
+          {/* Live Classes Button */}
           {userData && (
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -99,28 +102,19 @@ function Nav() {
             </motion.button>
           )}
 
-          {/* Role Based Dashboard Links */}
+          {/* Role-Based Dashboard Links */}
           {userData?.role === "educator" && (
-            <NavLink
-              text="Educator Panel"
-              onClick={() => navigate("/dashboard")}
-            />
+            <NavLink text="Educator Panel" onClick={() => navigate("/dashboard")} />
           )}
           {userData?.role === "student" && (
-            <NavLink
-              text="My Dashboard"
-              onClick={() => navigate("/studentdashboard")}
-            />
+            <NavLink text="My Dashboard" onClick={() => navigate("/studentdashboard")} />
           )}
 
           {/* Profile Section */}
           <div className="relative ml-2">
             {!userData ? (
               <motion.button
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)",
-                }}
+                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(59, 130, 246, 0.5)" }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => navigate("/login")}
                 className="px-8 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-lg border border-white/10 transition-all"
@@ -133,15 +127,15 @@ function Nav() {
                 <motion.div
                   whileHover={{ scale: 1.02 }}
                   onClick={() => setShowPro(!showPro)}
-                  className={`flex items-center gap-3 cursor-pointer p-1.5 pr-4 rounded-full border transition-all duration-300 ${showPro ? "bg-slate-800 border-amber-500/50" : "bg-slate-800/50 border-white/10 hover:border-white/30"}`}
+                  className={`flex items-center gap-3 cursor-pointer p-1.5 pr-4 rounded-full border transition-all duration-300 ${
+                    showPro
+                      ? "bg-slate-800 border-amber-500/50"
+                      : "bg-slate-800/50 border-white/10 hover:border-white/30"
+                  }`}
                 >
                   <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-slate-600">
                     {userData.photoUrl ? (
-                      <img
-                        src={userData.photoUrl}
-                        className="w-full h-full object-cover"
-                        alt="User"
-                      />
+                      <img src={userData.photoUrl} className="w-full h-full object-cover" alt="User" />
                     ) : (
                       <div className="w-full h-full bg-slate-700 flex items-center justify-center text-white font-bold text-sm">
                         {userData.name?.charAt(0).toUpperCase()}
@@ -176,9 +170,7 @@ function Nav() {
                         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                           Signed in as
                         </p>
-                        <p className="text-white font-bold truncate text-sm">
-                          {userData.email}
-                        </p>
+                        <p className="text-white font-bold truncate text-sm">{userData.email}</p>
                       </div>
 
                       {/* Links */}
@@ -254,12 +246,8 @@ function Nav() {
               {/* Drawer Header */}
               <div className="flex justify-between items-center mb-8 pb-6 border-b border-white/10">
                 <div className="flex flex-col">
-                  <span className="font-black text-white text-xl tracking-tight">
-                    Menu
-                  </span>
-                  <span className="text-[10px] text-slate-400 uppercase tracking-widest">
-                    Navigation
-                  </span>
+                  <span className="font-black text-white text-xl tracking-tight">Menu</span>
+                  <span className="text-[10px] text-slate-400 uppercase tracking-widest">Navigation</span>
                 </div>
                 <button
                   onClick={() => setShowHam(false)}
@@ -271,6 +259,18 @@ function Nav() {
 
               {/* Drawer Links */}
               <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
+
+                {/* FlowX */}
+                {userData && (
+                  <MobileItem
+                    icon={<span>🗺️</span>}
+                    text="FlowX"
+                    onClick={() => navigate("/flowcharts")}
+                    flowx
+                  />
+                )}
+
+                {/* Live Classes */}
                 {userData && (
                   <MobileItem
                     icon={<FaVideo />}
@@ -281,37 +281,22 @@ function Nav() {
                 )}
 
                 <MobileItem text="Home" onClick={() => navigate("/")} />
-                <MobileItem
-                  text="My Profile"
-                  onClick={() => navigate("/profile")}
-                />
-                <MobileItem
-                  text="My Courses"
-                  onClick={() => navigate("/enrolledcourses")}
-                />
+                <MobileItem text="My Profile" onClick={() => navigate("/profile")} />
+                <MobileItem text="My Courses" onClick={() => navigate("/enrolledcourses")} />
 
                 {userData?.role === "student" && (
                   <>
-                    <MobileItem
-                      text="Career Guidance"
-                      onClick={() => navigate("/career")}
-                    />
-                    <MobileItem
-                      text="Student Dashboard"
-                      onClick={() => navigate("/studentdashboard")}
-                    />
+                    <MobileItem text="Career Guidance" onClick={() => navigate("/career")} />
+                    <MobileItem text="Student Dashboard" onClick={() => navigate("/studentdashboard")} />
                   </>
                 )}
 
                 {userData?.role === "educator" && (
-                  <MobileItem
-                    text="Educator Dashboard"
-                    onClick={() => navigate("/dashboard")}
-                  />
+                  <MobileItem text="Educator Dashboard" onClick={() => navigate("/dashboard")} />
                 )}
               </div>
 
-              {/* Drawer Footer (Login/Logout) */}
+              {/* Drawer Footer */}
               <div className="pt-6 border-t border-white/10 mt-4">
                 {!userData ? (
                   <button
@@ -339,15 +324,6 @@ function Nav() {
 
 /* ================= REUSABLE COMPONENTS ================= */
 
-const NavButton = ({ text, onClick }) => (
-  <button
-    onClick={onClick}
-    className="px-4 py-2 rounded-lg text-slate-300 font-bold text-xs uppercase tracking-wide hover:text-white hover:bg-white/5 transition-all"
-  >
-    {text}
-  </button>
-);
-
 const NavLink = ({ text, onClick }) => (
   <span
     onClick={onClick}
@@ -368,20 +344,20 @@ const DropdownItem = ({ icon, label, onClick }) => (
   </div>
 );
 
-const MobileItem = ({ icon, text, onClick, highlight }) => (
+const MobileItem = ({ icon, text, onClick, highlight, flowx }) => (
   <button
-    onClick={() => {
-      onClick();
-    }}
+    onClick={onClick}
     className={`w-full flex items-center gap-4 p-4 rounded-2xl text-sm font-bold transition-all text-left
     ${
       highlight
         ? "bg-gradient-to-r from-red-500/10 to-red-900/10 text-red-400 border border-red-500/20"
+        : flowx
+        ? "bg-gradient-to-r from-violet-500/10 to-violet-900/10 text-violet-400 border border-violet-500/20"
         : "bg-white/5 text-slate-200 hover:bg-white/10 hover:translate-x-1 border border-transparent"
     }`}
   >
     {icon && (
-      <span className={highlight ? "text-red-400" : "text-amber-400"}>
+      <span className={highlight ? "text-red-400" : flowx ? "text-violet-400" : "text-amber-400"}>
         {icon}
       </span>
     )}
