@@ -294,7 +294,22 @@ function Nav() {
 
               {/* Drawer Links */}
               <div className="flex-1 flex flex-col gap-3 overflow-y-auto">
-
+               {/* AI Tutor */}
+                {userData && (
+                  <MobileItem
+                    icon={<span>🤖</span>}
+                    text="AI Tutor"
+                    onClick={openAITutor}
+                    highlight
+                  />
+                )}
+                {userData && (
+                  <MobileItem
+                    icon={<FaBrain />}
+                    text="Stress Analysis"
+                    onClick={() => navigate("/stress-analysis")}
+                  />
+                )}
                 {/* FlowX */}
                 {userData && (
                   <MobileItem
